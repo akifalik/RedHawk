@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "target": "www.skybriz.com",
+    "timestamp": "20260517_110655",
+    "started_at": "2026-05-17T11:06:55.539732",
+    "finished_at": "2026-05-17T11:07:20.876048"
+  },
+  "subdomains": [
+    "www.skybriz.com"
+  ],
+  "ports": {
+    "www.skybriz.com": [
+      {
+        "port": 443,
+        "state": "open",
+        "service": "https",
+        "banner": "HTTP/1.1 400 Bad Request\r\nServer: cloudflare\r\nDate: Sun, 17 May 2026 05:37:04 GMT\r\nContent-Type: text/html\r\nContent-Length: 253\r\nConnection: close\r\nCF-RAY: -"
+      },
+      {
+        "port": 80,
+        "state": "open",
+        "service": "http",
+        "banner": "HTTP/1.1 403 Forbidden\r\nDate: Sun, 17 May 2026 05:37:04 GMT\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Length: 16\r\nConnection: close\r\nCache-Control: private, max-age=0, no-store, no-cache, must"
+      },
+      {
+        "port": 2086,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 2082,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 2087,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 2083,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 8080,
+        "state": "open",
+        "service": "http-alt",
+        "banner": "HTTP/1.1 403 Forbidden\r\nDate: Sun, 17 May 2026 05:37:07 GMT\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Length: 16\r\nConnection: close\r\nCache-Control: private, max-age=0, no-store, no-cache, must"
+      },
+      {
+        "port": 2095,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 2096,
+        "state": "open",
+        "service": "unknown",
+        "banner": ""
+      },
+      {
+        "port": 8443,
+        "state": "open",
+        "service": "https-alt",
+        "banner": ""
+      }
+    ]
+  },
+  "shodan": {},
+  "osint": {
+    "emails": [],
+    "hosts": [
+      "www.skybriz.com"
+    ],
+    "ips": [],
+    "linkedin_people": [],
+    "source": "built-in passive (hackertarget, google, hunter.io)"
+  },
+  "screenshots": []
+}

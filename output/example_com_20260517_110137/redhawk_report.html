@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedHawk Report — example.com</title>
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+    --border: #30363d; --text: #c9d1d9; --muted: #8b949e;
+    --red: #f85149; --amber: #d29922; --green: #3fb950;
+    --blue: #58a6ff; --purple: #bc8cff;
+    --font: 'Courier New', Courier, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font);
+          font-size: 13px; line-height: 1.6; padding: 0; }
+
+  /* ── Header ── */
+  header { background: var(--bg2); border-bottom: 1px solid var(--border);
+            padding: 24px 32px; display: flex; align-items: center; gap: 20px; }
+  .logo { font-size: 28px; font-weight: 900; color: var(--red); letter-spacing: -1px; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .meta b { color: var(--text); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 700; margin-left: 8px; }
+  .badge-red { background: rgba(248,81,73,.15); color: var(--red);
+               border: 1px solid rgba(248,81,73,.3); }
+
+  /* ── Layout ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 32px; }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 15px; font-weight: 700; color: var(--blue);
+        border-bottom: 1px solid var(--border); padding-bottom: 8px;
+        margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em; }
+
+  /* ── Stat cards ── */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin-bottom: 32px; }
+  .stat { background: var(--bg2); border: 1px solid var(--border);
+           border-radius: 8px; padding: 16px; text-align: center; }
+  .stat-val { font-size: 32px; font-weight: 900; line-height: 1; color: var(--red); }
+  .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px;
+               text-transform: uppercase; letter-spacing: .06em; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; padding: 8px 12px; background: var(--bg3);
+        color: var(--muted); font-weight: 700; text-transform: uppercase;
+        font-size: 10px; letter-spacing: .08em; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--border);
+        vertical-align: top; word-break: break-all; }
+  tr:hover td { background: var(--bg3); }
+  .port-open { color: var(--green); font-weight: 700; }
+  .vuln { color: var(--red); font-weight: 700; }
+  .tag { display: inline-block; padding: 1px 6px; border-radius: 3px;
+          font-size: 10px; margin: 1px; }
+  .tag-green { background: rgba(63,185,80,.15); color: var(--green);
+                border: 1px solid rgba(63,185,80,.3); }
+  .tag-blue  { background: rgba(88,166,255,.12); color: var(--blue);
+                border: 1px solid rgba(88,166,255,.3); }
+  .tag-red   { background: rgba(248,81,73,.12);  color: var(--red);
+                border: 1px solid rgba(248,81,73,.3); }
+
+  /* ── Code / banners ── */
+  pre { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px;
+        padding: 8px; font-size: 11px; overflow-x: auto; color: var(--muted);
+        white-space: pre-wrap; word-break: break-all; max-height: 80px;
+        overflow-y: auto; }
+
+  /* ── Screenshots ── */
+  .screenshots { display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                  gap: 16px; }
+  .ss-card { background: var(--bg2); border: 1px solid var(--border);
+              border-radius: 8px; overflow: hidden; }
+  .ss-card img { width: 100%; display: block; height: 180px; object-fit: cover;
+                  object-position: top; }
+  .ss-url { padding: 8px 12px; font-size: 11px; color: var(--muted);
+             border-top: 1px solid var(--border); word-break: break-all; }
+
+  /* ── Misc ── */
+  .empty { color: var(--muted); font-style: italic; padding: 8px 0; font-size: 12px; }
+  .host-section { margin-bottom: 24px; }
+  .host-label { font-size: 12px; color: var(--amber); margin-bottom: 8px;
+                 font-weight: 700; }
+  footer { text-align: center; color: var(--muted); font-size: 11px;
+            padding: 24px; border-top: 1px solid var(--border); margin-top: 48px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">&#9900; RedHawk</div>
+    <div class="meta" style="margin-top:6px">
+      <b>Target:</b> example.com &nbsp;|&nbsp;
+      <b>Started:</b> 2026-05-17 11:01:37 &nbsp;|&nbsp;
+      <b>Finished:</b> 2026-05-17 11:02:27
+      <span class="badge badge-red">CONFIDENTIAL</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ── Summary stats ── -->
+<div class="stats">
+  <div class="stat"><div class="stat-val">2</div><div class="stat-lbl">Subdomains</div></div>
+  <div class="stat"><div class="stat-val">20</div><div class="stat-lbl">Open Ports</div></div>
+  <div class="stat"><div class="stat-val">0</div><div class="stat-lbl">CVEs (Shodan)</div></div>
+  <div class="stat"><div class="stat-val">0</div><div class="stat-lbl">Emails</div></div>
+  <div class="stat"><div class="stat-val">0</div><div class="stat-lbl">Screenshots</div></div>
+</div>
+
+<!-- ── Subdomains ── -->
+<section>
+  <h2>&#127758; Subdomain Enumeration</h2>
+  
+        <table>
+          <thead><tr><th>#</th><th>Hostname</th></tr></thead>
+          <tbody><tr><td>1</td><td>example.com</td></tr><tr><td>2</td><td>www.example.com</td></tr></tbody>
+        </table>
+</section>
+
+<!-- ── Port Scan ── -->
+<section>
+  <h2>&#128268; Port Scan &amp; Service Fingerprinting</h2>
+  
+            <div class="host-section">
+              <div class="host-label">&#9658; example.com</div>
+              <table>
+                <thead><tr><th>Port</th><th>Proto</th><th>Service</th><th>Banner</th></tr></thead>
+                <tbody><tr><td class='port-open'>80</td><td>tcp</td><td>http</td><td><pre>HTTP/1.1 403 Forbidden
+Date: Sun, 17 May 2026 05:31:57 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 16
+Connection: close
+Cache-Control: private, max-age=0, no-store, no-cache, must</pre></td></tr><tr><td class='port-open'>443</td><td>tcp</td><td>https</td><td><pre>HTTP/1.1 400 Bad Request
+Server: cloudflare
+Date: Sun, 17 May 2026 05:31:57 GMT
+Content-Type: text/html
+Content-Length: 253
+Connection: close
+CF-RAY: -</pre></td></tr><tr><td class='port-open'>2082</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2083</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2086</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2087</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2095</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2096</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>8080</td><td>tcp</td><td>http-alt</td><td><pre>HTTP/1.1 403 Forbidden
+Date: Sun, 17 May 2026 05:32:00 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 16
+Connection: close
+Cache-Control: private, max-age=0, no-store, no-cache, must</pre></td></tr><tr><td class='port-open'>8443</td><td>tcp</td><td>https-alt</td><td></td></tr></tbody>
+              </table>
+            </div>
+            <div class="host-section">
+              <div class="host-label">&#9658; www.example.com</div>
+              <table>
+                <thead><tr><th>Port</th><th>Proto</th><th>Service</th><th>Banner</th></tr></thead>
+                <tbody><tr><td class='port-open'>80</td><td>tcp</td><td>http</td><td><pre>HTTP/1.1 403 Forbidden
+Date: Sun, 17 May 2026 05:32:06 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 16
+Connection: close
+Cache-Control: private, max-age=0, no-store, no-cache, must</pre></td></tr><tr><td class='port-open'>443</td><td>tcp</td><td>https</td><td><pre>HTTP/1.1 400 Bad Request
+Server: cloudflare
+Date: Sun, 17 May 2026 05:32:06 GMT
+Content-Type: text/html
+Content-Length: 253
+Connection: close
+CF-RAY: -</pre></td></tr><tr><td class='port-open'>2082</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2083</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2086</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2087</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2095</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>2096</td><td>tcp</td><td>unknown</td><td></td></tr><tr><td class='port-open'>8080</td><td>tcp</td><td>http-alt</td><td><pre>HTTP/1.1 403 Forbidden
+Date: Sun, 17 May 2026 05:32:09 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 16
+Connection: close
+Cache-Control: private, max-age=0, no-store, no-cache, must</pre></td></tr><tr><td class='port-open'>8443</td><td>tcp</td><td>https-alt</td><td></td></tr></tbody>
+              </table>
+            </div>
+</section>
+
+<!-- ── Shodan ── -->
+<section>
+  <h2>&#128225; Shodan Passive Intelligence</h2>
+  <p class="empty">No Shodan data (API key required).</p>
+</section>
+
+<!-- ── OSINT ── -->
+<section>
+  <h2>&#128270; OSINT (theHarvester)</h2>
+  <p style='color:var(--muted);margin-bottom:12px'>Source: built-in passive (hackertarget, google, hunter.io)</p>
+            <div class="host-section" style="margin-top:16px">
+              <div class="host-label">Hosts (2)</div>
+              <table><thead><tr><th>Host</th></tr></thead><tbody><tr><td>example.com</td></tr><tr><td>www.example.com</td></tr></tbody></table>
+            </div>
+</section>
+
+<!-- ── Screenshots ── -->
+<section>
+  <h2>&#128247; Web Asset Screenshots</h2>
+  <p class="empty">No screenshots captured. Ensure chromium-browser is installed.</p>
+</section>
+
+</main>
+
+<footer>Generated by RedHawk &mdash; 2026-05-17 11:02:27 &mdash; For authorized use only.</footer>
+</body>
+</html>
